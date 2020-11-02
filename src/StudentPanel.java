@@ -4,55 +4,51 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class StudentPanel extends Panel implements ActionListener {
-    Panel studentGrades;
-    Panel info;
-    Label profileLink;
-    Label firstName;
-    Label lastName;
-    Label username;
-    JTable studentGradesTable;
+    Panel studentGradesPanel;
     public StudentPanel(User user){
-        GridLayout infoGrid = new GridLayout(0,4);
-        profileLink = new Label("Profile");
-        firstName = new Label("First Name: " + user.getFirstName());
-        lastName = new Label("Last Name: " + user.getLastName());
-        username = new Label("Username: " + user.getUsername());
-        Label[] topInfo = new Label[]{profileLink, firstName, lastName, username};
-
-        info = new Panel();
-        info.setSize(HomeScreen.frameWidth, HomeScreen.frameHeight/4);
-        for(Label i : topInfo){
-            info.add(i);
-        }
-        info.setLayout(infoGrid);
-        add(info);
-
-        studentGrades = new Panel();
+        studentGradesPanel = new Panel();
+        studentGradesPanel.setSize(HomeScreen.frameWidth, 3*HomeScreen.frameHeight/4);
 
         String[] columnNames = new String[]{"Subjects", "Teachers", "Grades"};
         Student student = (Student) user;
         HashMap<String, ArrayList<Grade>> studentGrades = student.getSubjectGrades();
 
+
+        String[][] rowData = new String[studentGrades.size()][3];
+        double finalGrade = 0;
+        int count = 0;
         for(String i : studentGrades.keySet()){
-            ArrayList<Grade> grades = studentGrades.get(i);
-            for(int j = 0; j < grades.size(); j++){
-                Grade grade = grades.get(j);
-                grade.getDenominators();
-                grade.getNumerators();
+            double num = 0;
+            double dem = 0;
+            for(int j = 0; j < studentGrades.get(i).size(); j ++){
+                num += studentGrades.get(i).get(j).getNumerator();
+                dem += studentGrades.get(i).get(j).getDenominator();
             }
+            rowData[count][0] = i;
+            rowData[count][1] = Data.getUserUsingSubject(i).getFirstName() + " " + Data.getUserUsingSubject(i).getLastName();
+            if(Double.isNaN((100 * num / dem))){
+                rowData[count][2] = String.valueOf(0) + "%";
+            }else{
+                rowData[count][2] = String.valueOf(100 * num / dem) + "%";
+            }
+            count++;
         }
-
-
-
-
-
-
+        JTable table = new JTable(rowData, columnNames){@Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }};
+        table.setBounds(0, HomeScreen.frameHeight/4, HomeScreen.frameWidth, HomeScreen.frameHeight/2);
+        JScrollPane sp = new JScrollPane(table);
+        studentGradesPanel.add(sp);
+        studentGradesPanel.add(table);
+        studentGradesPanel.setLayout(null);
+        add(studentGradesPanel);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        
     }
 }

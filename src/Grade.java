@@ -1,15 +1,17 @@
 public class Grade {
-    private double numerators;
-    private double denominators;
-    public Grade (double numerators, double denominators){
-        this.numerators = numerators;
-        this.denominators = denominators;
+    private double numerator;
+    private double denominator;
+    public Grade (double numerator, double denominator){
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
-    public double getNumerators() {
-        return numerators;
+
+    public double getNumerator() {
+        return numerator;
     }
-    public double getDenominators() {
-        return denominators;
+    public double getDenominator() {
+        return denominator;
     }
+
 }
 

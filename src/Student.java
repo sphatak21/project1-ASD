@@ -26,4 +26,7 @@ public class Student extends User {
         return subjectArray;
     }
 
+    public void setSubjectGrade(String subject, double num, double denom) {
+        this.subjectGrades.get(subject).add(new Grade(num, denom));
+    }
 }

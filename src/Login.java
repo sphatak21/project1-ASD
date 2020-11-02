@@ -11,21 +11,23 @@ public class Login extends Frame implements WindowListener, ActionListener {
     TextField username = new TextField();
     JPasswordField password = new JPasswordField();
     Button loginButton;
-
+    private static int projectWidth = 500;
+    private static int projectHeight = 500;
     static Login project = new Login();
 
     public static void main(String[] args){
-        project.setSize(500,500);
+        Data.init();
+        project.setSize(projectWidth, projectHeight);
         project.setVisible(true);
 
     }
 
     public Login() {
-        Data.init();
-        usernameLabel.setBounds(100, 200, 150, 25);
-        passwordLabel.setBounds(100, 250, 150, 25);
-        username.setBounds(250, 200, 150, 25);
-        password.setBounds(250, 250, 150, 25);
+
+        usernameLabel.setBounds(projectWidth/5, 4*projectHeight/10, 150, 25);
+        passwordLabel.setBounds(usernameLabel.getX(), usernameLabel.getY()+ 50, 150, 25);
+        username.setBounds(usernameLabel.getX() + 150, usernameLabel.getY(), 150, 25);
+        password.setBounds(passwordLabel.getX() + 150, passwordLabel.getY(), 150, 25);
 
         loginButton = new Button("Login");
         loginButton.setBounds(200,300,100, 40);
@@ -48,11 +50,17 @@ public class Login extends Frame implements WindowListener, ActionListener {
             boolean passwordValid = Data.checkPassword(usernameStr, passwordStr);
             if(passwordValid){
                 User currentUser = Data.getUser(usernameStr);
-                loadLoginScreen(currentUser);
+                login(currentUser);
+            }else{
+                username.setText("Incorrect Password");
+                password.setText("");
             }
+        }else {
+            username.setText("Incorrect Username");
+            password.setText("");
         }
     }
-    public void loadLoginScreen(User currentUser){
+    public void login(User currentUser){
         project.dispose();
         HomeScreen homeScreen = new HomeScreen(currentUser, 600, 600);
         homeScreen.setSize(600,600);
