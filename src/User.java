@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class User {
     private String username;
     private String firstName;
@@ -11,28 +8,10 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-
     }
-
     public String getUsername() {
         return username;
     }
-
-    /*public void setName(String name) {
-        this.name = name;
-    }*/
-
-    /*public String getPassword() {
-        return password;
-    }*/
-
-    /*public void setPassword(String password) {
-        this.password = password;
-    }*/
-
-
-
-
     public static boolean checkPassword(String username, String password){
         User currentUser = Data.getUser(username);
         if(currentUser.password.equals(password)){
@@ -55,11 +34,9 @@ public class User {
                 return false;
             }
     }
-
     public String getFirstName() {
         return firstName;
     }
-
     public String getLastName() {
         return lastName;
     }

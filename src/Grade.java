@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Grade {
     private double numerator;
     private double denominator;
@@ -12,6 +13,12 @@ public class Grade {
     public double getDenominator() {
         return denominator;
     }
-
+    public static String GradetoString (ArrayList<Grade> grades){
+        String s = "";
+        for (int i = 0; i < grades.size(); i++){
+            s += grades.get(i).getNumerator() + "/";
+            s += grades.get(i).getDenominator() + "\n";
+        }
+        return s;
+    }
 }
-

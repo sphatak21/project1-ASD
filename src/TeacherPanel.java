@@ -1,32 +1,25 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-    public class TeacherPanel extends Panel implements TableModelListener, ActionListener {
-        Panel StudentList;
-        JTable table;
-        Button addGrade;
-        double numerator;
-        double denominator;
-        Teacher teacher;
-        public TeacherPanel(User user){
-            addGrade = new Button("Add Grade");
-            addGrade.addActionListener(this);
-            teacher = (Teacher) user;
-            displayTable();
-        }
-        public Object GetData(JTable table, int row_index, int col_index){
-            return table.getModel().getValueAt(row_index, col_index);
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-        public void tableChanged(TableModelEvent e){
+public class TeacherPanel extends Panel implements TableModelListener {
+    Panel StudentList;
+    JTable table;
+    Button addGrade;
+    double numerator;
+    double denominator;
+    Teacher teacher;
+    public TeacherPanel(User user){
+        addGrade = new Button("Add Grade");
+        teacher = (Teacher) user;
+        displayTable();
+    }
+    public Object GetData(JTable table, int row_index, int col_index){
+        return table.getModel().getValueAt(row_index, col_index);
+    }
+    public void tableChanged(TableModelEvent e){
             int row = e.getFirstRow();
             int column = e.getColumn();
             if (column == 2){
@@ -36,7 +29,6 @@ import javax.swing.event.TableModelListener;
             }
             if(numerator >= 0 && denominator > 0){
                 String name  = GetData(table, row, 0).toString();
-                ///String lastName = GetData(table, row, 1).toString();
                 String[] arr = name.split(" ");
                 Student s = Data.getStudentUsingName(arr[0], arr[1]);
                 s.setSubjectGrade(teacher.getSubject(), numerator, denominator);
@@ -82,11 +74,11 @@ import javax.swing.event.TableModelListener;
                 data[count][4] = "";
                 count++;
             }
-            table = new JTable(data, columnNames)
-            {@Override
-            public boolean isCellEditable(int row, int column) {
+            table = new JTable(data, columnNames) {@Override
+                public boolean isCellEditable(int row, int column) {
                 return column == 2 || column == 4;
-            }};
+            }
+            };
             table.getModel().addTableModelListener(this);
             table.setBounds(0, HomeScreen.frameHeight/4, HomeScreen.frameWidth, HomeScreen.frameHeight);
             StudentList.setLayout(null);
@@ -94,6 +86,4 @@ import javax.swing.event.TableModelListener;
             StudentList.add(table);
             add(StudentList);
         }
-    }
-
-
+}

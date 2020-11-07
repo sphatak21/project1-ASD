@@ -23,7 +23,6 @@ public class Login extends Frame implements WindowListener, ActionListener {
     }
 
     public Login() {
-
         usernameLabel.setBounds(projectWidth/5, 4*projectHeight/10, 150, 25);
         passwordLabel.setBounds(usernameLabel.getX(), usernameLabel.getY()+ 50, 150, 25);
         username.setBounds(usernameLabel.getX() + 150, usernameLabel.getY(), 150, 25);
@@ -66,7 +65,6 @@ public class Login extends Frame implements WindowListener, ActionListener {
         homeScreen.setSize(600,600);
         homeScreen.setVisible(true);
     }
-
     @Override public void windowOpened(WindowEvent e) {
 
     }

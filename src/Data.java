@@ -16,7 +16,8 @@ public class Data {
         users.put("mraquet", new Teacher("mraquet", "Mark", "Raquet", "APMECH", "Science"));
         assignUsers();
         Student s = (Student) getUser("sphatak21");
-        s.setSubjectGrade("Computer Science", 10, 100);
+        s.setSubjectGrade("Computer Science", 93, 100);
+        s.setSubjectGrade("Math", 44, 66);
     }
     public static boolean checkUsername(String username){
         for ( String i : users.keySet()) {
@@ -62,5 +63,4 @@ public class Data {
         }
         return null;
     }
-
 }

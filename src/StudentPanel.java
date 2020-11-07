@@ -1,12 +1,11 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class StudentPanel extends Panel implements ActionListener {
+public class StudentPanel extends Panel {
     Panel studentGradesPanel;
     public StudentPanel(User user){
         studentGradesPanel = new Panel();
@@ -15,7 +14,6 @@ public class StudentPanel extends Panel implements ActionListener {
         String[] columnNames = new String[]{"Subjects", "Teachers", "Grades"};
         Student student = (Student) user;
         HashMap<String, ArrayList<Grade>> studentGrades = student.getSubjectGrades();
-
 
         String[][] rowData = new String[studentGrades.size()][3];
         double finalGrade = 0;
@@ -32,7 +30,7 @@ public class StudentPanel extends Panel implements ActionListener {
             if(Double.isNaN((100 * num / dem))){
                 rowData[count][2] = String.valueOf(0) + "%";
             }else{
-                rowData[count][2] = String.valueOf(100 * num / dem) + "%";
+                rowData[count][2] = String.format("%.2f", 100 * num / dem) + "%";
             }
             count++;
         }
@@ -40,15 +38,22 @@ public class StudentPanel extends Panel implements ActionListener {
         public boolean isCellEditable(int row, int column) {
             return false;
         }};
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(table.getSelectedRow() != -1){
+                    String a = table.getValueAt(table.getSelectedRow(), 0).toString();
+                    ArrayList<Grade> grades = student.getOneSubjectGrades(a);
+                    JOptionPane.showMessageDialog(null, Grade.GradetoString(grades));
+
+                }
+            }
+        });
         table.setBounds(0, HomeScreen.frameHeight/4, HomeScreen.frameWidth, HomeScreen.frameHeight/2);
         JScrollPane sp = new JScrollPane(table);
         studentGradesPanel.add(sp);
         studentGradesPanel.add(table);
         studentGradesPanel.setLayout(null);
         add(studentGradesPanel);
-    }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
     }
 }
