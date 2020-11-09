@@ -3,11 +3,11 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    public User(String username, String firstName, String lastName, String password){
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String uname, String fname, String lname, String pass){
+        this.username = uname;
+        this.password = pass;
+        this.firstName = fname;
+        this.lastName = lname;
     }
     public String getUsername() {
         return username;

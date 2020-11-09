@@ -27,6 +27,7 @@ public class HomeScreen extends Frame implements WindowListener, ActionListener 
         firstName = new Label("First Name: " + currentUser.getFirstName());
         lastName = new Label("Last Name: " + currentUser.getLastName());
         username = new Label("Username: " + currentUser.getUsername());
+
         Label[] topInfo = new Label[]{profileLink, firstName, lastName, username};
 
         info = new Panel();

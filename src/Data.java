@@ -6,7 +6,7 @@ public class Data {
     private static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     public static void init(){
         users.put("sphatak21", new Student("sphatak21", "Sidd", "Phatak","Password"));
-        users.put("snarendran21", new Student("snarendran21", "Sameer", "Narendran", "BigSam1"));
+        users.put("jdoe21", new Student("jdoe21", "John", "Doe", "JD1"));
         users.put("rwilson", new Teacher("rwilson", "Ryan", "Wilson", "APCSA", "Computer Science"));
         users.put("marnold", new Teacher("marnold", "Marie", "Arnold", "APLIT", "English"));
         users.put("sjidarian", new Teacher("sjidarian", "Sedrak", "Jidarian", "CALC3", "Math"));
@@ -15,9 +15,23 @@ public class Data {
         users.put("gavena", new Teacher("gavena", "Gladys", "Avena", "ESPANOL", "Spanish"));
         users.put("mraquet", new Teacher("mraquet", "Mark", "Raquet", "APMECH", "Science"));
         assignUsers();
-        Student s = (Student) getUser("sphatak21");
-        s.setSubjectGrade("Computer Science", 93, 100);
-        s.setSubjectGrade("Math", 44, 66);
+
+        String [] subjectArray = Student.getSubjectArray();
+        for(Student i : students){
+            for(String a : subjectArray){
+                int x = 0;
+                while(x < 3){
+                    double grade = Math.random();
+                    if(grade < .5){
+                        grade+=.5;
+                    }
+                    int denom = 10;
+                    double num = (int) (grade * 10);
+                    i.setSubjectGrade(a, num, denom);
+                    x++;
+                }
+            }
+        }
     }
     public static boolean checkUsername(String username){
         for ( String i : users.keySet()) {

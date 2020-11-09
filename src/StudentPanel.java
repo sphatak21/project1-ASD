@@ -13,9 +13,7 @@ public class StudentPanel extends Panel {
         String[] columnNames = new String[]{"Subjects", "Teachers", "Grades"};
         Student student = (Student) user;
         HashMap<String, ArrayList<Grade>> studentGrades = student.getSubjectGrades();
-
         String[][] rowData = new String[studentGrades.size()][3];
-        double finalGrade = 0;
         int count = 0;
         for(String i : studentGrades.keySet()){
             double num = 0;
@@ -27,7 +25,7 @@ public class StudentPanel extends Panel {
             rowData[count][0] = i;
             rowData[count][1] = Data.getUserUsingSubject(i).getFirstName() + " " + Data.getUserUsingSubject(i).getLastName();
             if(Double.isNaN((100 * num / dem))){
-                rowData[count][2] = String.valueOf(0) + "%";
+                rowData[count][2] = 0 + "%";
             }else{
                 rowData[count][2] = String.format("%.2f", 100 * num / dem) + "%";
             }
