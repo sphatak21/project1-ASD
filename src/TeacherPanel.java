@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-
 public class TeacherPanel extends Panel implements TableModelListener {
     Panel StudentList;
     JTable table;

@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public class Student extends User {
     private  HashMap<String, ArrayList<Grade>> subjectGrades = new HashMap<String, ArrayList<Grade>>();
     private static String[] subjectArray = new String[]

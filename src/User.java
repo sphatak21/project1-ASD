@@ -20,19 +20,19 @@ public class User {
         return false;
     }
     public static boolean isStudent(String username) {
-            int num = -1;
-            for(int i = 0; i < username.length(); i++){
-                try {
-                    num = Integer.parseInt(Character.toString(username.charAt(i)));
-                } catch (Exception e) {
-                    num = -1;
-                }
+        int num = -1;
+        for(int i = 0; i < username.length(); i++){
+            try {
+                num = Integer.parseInt(Character.toString(username.charAt(i)));
+            }catch (Exception e) {
+                num = -1;
             }
-            if (num >= 0){
-                return true;
-            }else{
-                return false;
-            }
+        }
+        if (num >= 0){
+            return true;
+        }else{
+            return false;
+        }
     }
     public String getFirstName() {
         return firstName;

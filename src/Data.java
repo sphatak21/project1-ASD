@@ -59,7 +59,6 @@ public class Data {
             if(fname.equals(i.getFirstName()) && lname.equals(i.getLastName())){
                 return i;
             }
-
         }
         return null;
     }

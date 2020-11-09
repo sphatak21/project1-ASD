@@ -8,9 +8,11 @@ import java.awt.event.ActionListener;
 public class Login extends Frame implements WindowListener, ActionListener {
     Label usernameLabel = new Label("Enter your username:");
     Label passwordLabel = new Label("Enter your password:");
+    Label loginError = new Label("");
     TextField username = new TextField();
     JPasswordField password = new JPasswordField();
     Button loginButton;
+
     private static int projectWidth = 500;
     private static int projectHeight = 500;
     static Login project = new Login();
@@ -19,15 +21,14 @@ public class Login extends Frame implements WindowListener, ActionListener {
         Data.init();
         project.setSize(projectWidth, projectHeight);
         project.setVisible(true);
-
     }
-
     public Login() {
         usernameLabel.setBounds(projectWidth/5, 4*projectHeight/10, 150, 25);
         passwordLabel.setBounds(usernameLabel.getX(), usernameLabel.getY()+ 50, 150, 25);
         username.setBounds(usernameLabel.getX() + 150, usernameLabel.getY(), 150, 25);
         password.setBounds(passwordLabel.getX() + 150, passwordLabel.getY(), 150, 25);
 
+        loginError.setBounds(usernameLabel.getX()+50, passwordLabel.getY() + 25,300, 25);
         loginButton = new Button("Login");
         loginButton.setBounds(200,300,100, 40);
         loginButton.addActionListener(this);
@@ -36,6 +37,7 @@ public class Login extends Frame implements WindowListener, ActionListener {
         add(passwordLabel);
         add(username);
         add(password);
+        add(loginError);
         add(loginButton);
         this.addWindowListener(this);
         setLayout(null);
@@ -51,11 +53,13 @@ public class Login extends Frame implements WindowListener, ActionListener {
                 User currentUser = Data.getUser(usernameStr);
                 login(currentUser);
             }else{
-                username.setText("Incorrect Password");
+                loginError.setText("Incorrect Username/Password");
+                username.setText("");
                 password.setText("");
             }
         }else {
-            username.setText("Incorrect Username");
+            loginError.setText("Incorrect Username/Password");
+            username.setText("");
             password.setText("");
         }
     }

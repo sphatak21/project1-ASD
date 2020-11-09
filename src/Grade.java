@@ -6,7 +6,6 @@ public class Grade {
         this.numerator = numerator;
         this.denominator = denominator;
     }
-
     public double getNumerator() {
         return numerator;
     }

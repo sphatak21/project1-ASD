@@ -4,7 +4,6 @@ import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 public class StudentPanel extends Panel {
     Panel studentGradesPanel;
     public StudentPanel(User user){
